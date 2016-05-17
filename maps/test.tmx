@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="earthbound" tilewidth="32" tileheight="32" spacing="1" margin="6" tilecount="864" columns="16">
+  <image source="../img/tilesets/earthbound.png" width="539" height="1807"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt19sJwjAYgNF4G0DEBdygI6grC77rCK7iAFZQCLU3lZqo5+G8NBQCHyR/5iGEecV09PiNdK49NMlHnx6LiqK0itbX5f+b0lbXwXosI0WNZQZ7/0VdPepa6JG+x3Ecwu5Gj8/3uDeJe5z0GNyk5Q6u9jg80cPM9nqPpiZ159W+Rw8z9Ovazqr4DjnX9GhqosV7PbqaxD3Oegzeo2097rHXI4se8T2iR9oe9yZFeHwPmnnT9WiSev+/pu/ZokVePdDj33hH50eP7zQbdUu9RwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKC/C+FbrEQ=
+  </data>
+ </layer>
+</map>
