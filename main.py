@@ -1,48 +1,35 @@
-import pygame
-import pyscroll
-from pytmx.util_pygame import load_pygame
-screen_size = width, height = 320, 320
+from cocos.sprite import Sprite
+from cocos.tiles import load
+from cocos.layer import ScrollingManager, ScrollableLayer
+from cocos.director import director
+from cocos.scene import Scene
 
-pygame.init()
-screen = pygame.display.set_mode(screen_size)
-pygame.display.set_caption('Some Game Demo')
+from pyglet.window import key
+from pyglet import image
 
-# Load TMX data
-tmx_data = load_pygame("maps/test.tmx")
+window_width, window_height = 320, 320
+director.init(width=320, height=320)
+scroller = ScrollingManager()
+keyboard = key.KeyStateHandler()
 
-# Make data source for the map
-map_data = pyscroll.TiledMapData(tmx_data)
+class PlayerLayer(ScrollableLayer):
+	def __init__(self):
+		super(PlayerLayer, self).__init__()
 
-# Make the scrolling layer
-map_layer = pyscroll.BufferedRenderer(map_data, screen_size)
+		spritesheet = image.load('dude.png')
+		frames = image.ImageGrid(spritesheet, 4, 3)
+		self.sprite = Sprite(frames[10])
+		# center on first tile
+		self.sprite.position = self.sprite.width / 2, window_height - (self.sprite.height / 2)
 
-# make the PyGame SpriteGroup with a scrolling map
-group = pyscroll.PyscrollGroup(map_layer=map_layer)
+		self.add(self.sprite)
 
-# # Add sprites to the group
-# group.add(sprite)
+player_layer = PlayerLayer()
 
-# # Center the layer and sprites on a sprite
-# group.center(sprite.rect.center)
+MapLayer = load('test.tmx')['base']
 
+scroller.add(MapLayer)
+scroller.add(player_layer)
 
-done = False
-
-clock = pygame.time.Clock()
-
-while not done:
-
-	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			done = True
-
-	# Draw map
-	group.draw(screen)
-
-	# update
-	pygame.display.flip()
-
-	# limit to 60 fps
-	clock.tick(60)
-
-pygame.quit()
+director.window.push_handlers(keyboard)
+director.run(Scene(scroller))
